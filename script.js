@@ -13,7 +13,8 @@ buttonCheck.addEventListener("click", function () {
   if (!guess) {
     document.querySelector(".message").textContent = "No Number! :(";
   } else if (guess === secretNumber) {
-    document.querySelector(".message").textContent = "Yeeey! Correct Number! (Press Again! to continue playing)";
+    document.querySelector(".message").textContent =
+      "Yeeey! Correct Number! (Press Again! to continue playing)";
     document.querySelector(".highscore").textContent = highScore;
     highScore++;
     buttonCheck.disabled = true;
@@ -32,6 +33,6 @@ buttonCheck.addEventListener("click", function () {
   if (score <= 0) {
     buttonCheck.disabled = true;
     document.querySelector(".message").textContent =
-      "You lost. (Press Again! to continue playing)"";
+      "You lost. (Press Again! to continue playing)";
   }
 });
