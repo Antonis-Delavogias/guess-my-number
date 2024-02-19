@@ -9,7 +9,6 @@ let highScore = 0; //default highscore of the user
 
 buttonCheck.addEventListener("click", function () {
   const guess = Number(document.querySelector(".guess").value);
-  console.log(guess, typeof guess);
 
   //when no input
   if (!guess) {
@@ -20,47 +19,43 @@ buttonCheck.addEventListener("click", function () {
     document.querySelector(".message").textContent =
       "Yeeey! Correct Number! (Press Again! to continue playing)";
     document.querySelector(".number").textContent = secretNumber;
+    buttonCheck.disabled = true;
+    document.querySelector("body").style.backgroundColor = "#60b347";
 
     if (score > highScore) {
       highScore = score;
       document.querySelector(".highscore").textContent = highScore;
     }
 
-    buttonCheck.disabled = true;
-    document.querySelector("body").style.backgroundColor = "#60b347";
-
-    //when guess is too high
-  } else if (guess > secretNumber) {
-    document.querySelector(".message").textContent =
-      "Too high! (Never give up)";
-    score--;
-    document.querySelector(".score").textContent = score;
-
-    //when guess is too low
-  } else if (guess < secretNumber) {
-    document.querySelector(".message").textContent = "Too low.. (sad face)";
-    score--;
-    document.querySelector(".score").textContent = score;
+    //when guess is wrong
+  } else if (guess !== secretNumber) {
+    if (score > 1) {
+      document.querySelector(".message").textContent =
+        guess > secretNumber
+          ? "Too high! (Never give up)"
+          : "Too low.. (sad face)";
+      score--;
+      document.querySelector(".score").textContent = score;
+    } else {
+      buttonCheck.disabled = true;
+      document.querySelector(".message").textContent =
+        "You lost. (Press Again! to continue playing)";
+      document.querySelector("body").style.backgroundColor = "#b30000";
+      document.querySelector(".number").textContent = secretNumber;
+    }
   }
-  //when the player loses
-  if (score === 0) {
-    buttonCheck.disabled = true;
-    document.querySelector(".message").textContent =
-      "You lost. (Press Again! to continue playing)";
-    document.querySelector("body").style.backgroundColor = "#b30000";
+
+  //again button
+  buttonAgain.addEventListener("click", function () {
+    secretNumber = Math.trunc(Math.random() * 20) + 1;
+    score = 20;
+
     document.querySelector(".number").textContent = secretNumber;
-  }
-});
-
-buttonAgain.addEventListener("click", function () {
-  secretNumber = Math.trunc(Math.random() * 20) + 1;
-  score = 20;
-
-  document.querySelector(".number").textContent = secretNumber;
-  buttonCheck.disabled = false;
-  document.querySelector(".number").textContent = "?";
-  document.querySelector(".score").textContent = score;
-  document.querySelector(".message").textContent = "Start guessing...";
-  document.querySelector("body").style.background = "#222";
-  document.querySelector(".guess").value = "";
+    buttonCheck.disabled = false;
+    document.querySelector(".number").textContent = "?";
+    document.querySelector(".score").textContent = score;
+    document.querySelector(".message").textContent = "Start guessing...";
+    document.querySelector("body").style.background = "#222";
+    document.querySelector(".guess").value = "";
+  });
 });
