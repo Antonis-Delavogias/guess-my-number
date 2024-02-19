@@ -22,6 +22,7 @@ buttonCheck.addEventListener("click", function () {
     document.querySelector(".highscore").textContent = highScore;
     highScore++;
     buttonCheck.disabled = true;
+    document.querySelector("body").style.backgroundColor = "#60b347";
 
     //when guess is too high
   } else if (guess > secretNumber) {
@@ -37,10 +38,11 @@ buttonCheck.addEventListener("click", function () {
     document.querySelector(".score").textContent = score;
   }
 
-  //disabling the check button if the score is under 0
-  if (score <= 0) {
+  //when the player loses, make the background red
+  if (score === 0) {
     buttonCheck.disabled = true;
     document.querySelector(".message").textContent =
       "You lost. (Press Again! to continue playing)";
+    document.querySelector("body").style.backgroundColor = "#b30000";
   }
 });
