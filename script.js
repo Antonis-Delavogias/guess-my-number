@@ -23,4 +23,11 @@ buttonCheck.addEventListener("click", function () {
     score--;
     document.querySelector(".score").textContent = score;
   }
+
+  //disabling the check button if the score is under 0
+  if (score <= 0) {
+    buttonCheck.disabled = true;
+    document.querySelector(".message").textContent =
+      "You lost. Press the 'Again' button to continue playing! =)";
+  }
 });
