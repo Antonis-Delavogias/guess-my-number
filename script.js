@@ -1,7 +1,8 @@
 "use strict";
 
 const buttonCheck = document.querySelector(".check");
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
+const buttonAgain = document.querySelector(".again");
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
 let score = 20; //this is the initial score
 let highScore = 1; //default highscore of the user
@@ -43,5 +44,19 @@ buttonCheck.addEventListener("click", function () {
     document.querySelector(".message").textContent =
       "You lost. (Press Again! to continue playing)";
     document.querySelector("body").style.backgroundColor = "#b30000";
+    document.querySelector(".number").textContent = secretNumber;
   }
+});
+
+buttonAgain.addEventListener("click", function () {
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  score = 20;
+
+  document.querySelector(".number").textContent = secretNumber;
+  buttonCheck.disabled = false;
+  document.querySelector(".number").textContent = "?";
+  document.querySelector(".score").textContent = score;
+  document.querySelector(".message").textContent = "Start guessing...";
+  document.querySelector("body").style.background = "#222";
+  document.querySelector(".guess").value = "";
 });
