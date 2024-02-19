@@ -5,7 +5,7 @@ const buttonAgain = document.querySelector(".again");
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
 let score = 20; //this is the initial score
-let highScore = 1; //default highscore of the user
+let highScore = 0; //default highscore of the user
 
 buttonCheck.addEventListener("click", function () {
   const guess = Number(document.querySelector(".guess").value);
@@ -20,8 +20,12 @@ buttonCheck.addEventListener("click", function () {
     document.querySelector(".message").textContent =
       "Yeeey! Correct Number! (Press Again! to continue playing)";
     document.querySelector(".number").textContent = secretNumber;
-    document.querySelector(".highscore").textContent = highScore;
-    highScore++;
+
+    if (score > highScore) {
+      highScore = score;
+      document.querySelector(".highscore").textContent = highScore;
+    }
+
     buttonCheck.disabled = true;
     document.querySelector("body").style.backgroundColor = "#60b347";
 
