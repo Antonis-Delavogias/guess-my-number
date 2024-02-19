@@ -10,19 +10,27 @@ let highScore = 1; //default highscore of the user
 buttonCheck.addEventListener("click", function () {
   const guess = Number(document.querySelector(".guess").value);
   console.log(guess, typeof guess);
+
+  //when no input
   if (!guess) {
     document.querySelector(".message").textContent = "No Number! :(";
+
+    //when player wins
   } else if (guess === secretNumber) {
     document.querySelector(".message").textContent =
       "Yeeey! Correct Number! (Press Again! to continue playing)";
     document.querySelector(".highscore").textContent = highScore;
     highScore++;
     buttonCheck.disabled = true;
+
+    //when guess is too high
   } else if (guess > secretNumber) {
     document.querySelector(".message").textContent =
       "Too high! (Never give up)";
     score--;
     document.querySelector(".score").textContent = score;
+
+    //when guess is too low
   } else if (guess < secretNumber) {
     document.querySelector(".message").textContent = "Too low.. (sad face)";
     score--;
